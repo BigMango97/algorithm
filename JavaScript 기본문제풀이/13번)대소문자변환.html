@@ -1,0 +1,30 @@
+<!--대문자와 소문자가 같이 존재하는 문자열을 입력받아 대문자는 소문자로 소문자는 대문자로 
+변환하여 출력하는 프로그램을 작성하세요.-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function stringChage(arr) {
+        let answer = "";
+        for (a of arr) {
+          if (a == a.toUpperCase()) {
+            a = a.toLowerCase();
+            answer += a;
+          } else if (a == a.toLowerCase()) {
+            a = a.toUpperCase();
+            answer += a;
+          }
+        }
+        return answer;
+      }
+      let arr = "StuDY";
+      console.log(stringChage(arr));
+    </script>
+  </body>
+</html>
