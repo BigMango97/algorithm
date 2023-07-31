@@ -12,9 +12,10 @@
         var answer = 0;
         var key = Number.MIN_SAFE_INTEGER;
         for (let i = 0; i < arr.length; i++) {
-          if (key < arr[i]) {
-            key = arr[i];
-            answer++;
+          if(key<arr[i]){
+            key = arr[i]
+            answer++
+
           }
         }
         return answer;
