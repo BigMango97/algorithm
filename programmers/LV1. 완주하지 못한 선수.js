@@ -9,6 +9,7 @@
 // 참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.
 // 참가자 중에는 동명이인이 있을 수 있습니다.
 
+// 문제풀이 1
 function solution(participant, completion) {
     participant.sort();
     completion.sort();
@@ -19,4 +20,27 @@ function solution(participant, completion) {
     }
 }
 
+//문제풀이 2
+function solution(participant, completion) {
+    let answer = "";
+    let participantMap = new Map();
+    for(let x of participant){
+        if(participantMap.has(x)){
+            participantMap.set(x,participantMap.get(x)+1)
+        }else{
+            participantMap.set(x,1)
+        }
+    }
+    for(let x of completion){
+        if(participantMap.has(x)){
+            participantMap.set(x,participantMap.get(x)-1)
+        }
+    }
+    for(let [key,value] of participantMap.entries()){
+        if(value!==0){
+            return key
+            break;
+        }
+    }
+}
 
