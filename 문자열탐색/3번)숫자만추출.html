@@ -8,10 +8,17 @@
   </head>
   <body>
     <script>
+
+      //문제풀이 1
       function solution(str) {
         let answer = "";
-        answer = str.replace(/[^0-9]/g, "");
-        return parseInt(answer);
+        for(let x of str){
+          // 숫자인지 아닌지 구분
+          if(!isNaN(x)){
+            answer+=x
+          }
+        }
+        return parseInt(answer)
       }
       let str = "g0en2T0s8eSoft";
       console.log(solution(str));
