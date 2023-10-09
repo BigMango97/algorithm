@@ -15,15 +15,25 @@
 # 출력은 표준 출력을 사용한다. 입력받은 데이터에 대해, 수강신청 관리 시스템의 규칙을 적용한 후 수강신청에 성공한 인원의 학번을 한 줄에 1개씩 출력한다.
 
 import sys
-n,m = map(int, input().split())
+n,m = map(int, sys.stdin.readline().split())
 dict={}
 for i in range(m):
-    stu = input().rstrip()
+    stu = sys.stdin.readline().strip()
     if stu in dict:
         del dict[stu]
+        dict[stu]=1
     else:
         dict[stu]=1
 
-keys_list = list(dict.keys())[:3]
-for i in range(len(keys_list)):
-    print(keys_list[i])
+
+dict_list = list(dict.keys())
+dict_len = len(dict_list)
+dict_list_range = list(dict.keys())[:n]
+
+if(dict_len > n):
+    for i in dict_list_range:
+        print(i)
+else:
+    for j in dict_list_range:
+        print(j)
+
