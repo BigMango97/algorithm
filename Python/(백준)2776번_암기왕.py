@@ -8,22 +8,19 @@
 # 출력
 # ‘수첩2’에 적혀있는 M개의 숫자 순서대로, ‘수첩1’에 있으면 1을, 없으면 0을 출력한다.
 
+import sys
+T = int(sys.stdin.readline().rstrip())
+for i in range(T):
+    nNum = int(sys.stdin.readline().rstrip())
+    nList = list(map(int, sys.stdin.readline().rstrip().split()))
+    nDict = {}
+    for i in range(len(nList)):
+            nDict[nList[i]] = 1
+    mNum = int(sys.stdin.readline().rstrip())
+    mList = list(map(int, sys.stdin.readline().rstrip().split()))
 
-T = int(input())
-nNum = int(input())
-nList = list(map(int,input().split()))
-nDict = {}
-for i in range(len(nList)):
-    if nList[i] in nDict:
-        nDict[nList[i]] +=1
-    else:
-        nDict[nList[i]] = 1
-
-mNum = int(input())
-mList = list(map(int,input().split()))
-
-for i in range(len(mList)):
-    if mList[i] in nDict :
-        print(1)
-    else:
-        print(0)
+    for i in mList:
+        if (i in nDict):
+            print(1)
+        elif(i not in nDict):
+            print(0)
