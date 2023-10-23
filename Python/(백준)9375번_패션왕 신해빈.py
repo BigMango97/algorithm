@@ -22,10 +22,8 @@ for i in range(N):
             dict[hb[1]] +=1
         else:
             dict[hb[1]] =1 
-    print(dict)
     count = 1
     dict_list=list(dict.values())
-    print("dict_list",dict_list)
     for k in range(len(dict_list)):
         count*=(dict_list[k]+1)
     print(count-1)
