@@ -1,0 +1,98 @@
+-- 조건에 부합하는 중고거래 상태 조회하기
+-- Level 2 7,956명 완료
+SELECT BOARD_ID, WRITER_ID, TITLE, PRICE,
+       CASE WHEN STATUS = 'SALE' THEN '판매중'
+            WHEN STATUS = 'RESERVED' THEN '예약중'
+            WHEN STATUS = 'DONE' THEN '거래완료'
+            END AS STATUS
+FROM USED_GOODS_BOARD
+WHERE TO_CHAR(CREATED_DATE,'YYYY-MM-DD') = '2022-10-05'
+ORDER BY BOARD_ID DESC
+ 
+-- 자동차 대여 기록에서 장기/단기 대여 구분하기
+-- Level 1 8,781명 완료
+SELECT HISTORY_ID, CAR_ID, TO_CHAR(START_DATE,'YYYY-MM-DD') AS START_DATE	, TO_CHAR(END_DATE, 'YYYY-MM-DD') AS END_DATE,
+       CASE WHEN (END_DATE - START_DATE + 1) >= 30 THEN '장기 대여'
+       ELSE '단기 대여' END AS RENT_TYPE
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+WHERE TO_CHAR(START_DATE,'YYYY-MM') = '2022-09'
+ORDER BY HISTORY_ID DESC
+
+-- 대여 기록이 존재하는 자동차 리스트 구하기
+-- Level 3 6,206명 완료
+SELECT DISTINCT CC.CAR_ID
+FROM CAR_RENTAL_COMPANY_CAR CC, CAR_RENTAL_COMPANY_RENTAL_HISTORY CCRH
+WHERE CC.CAR_ID	= CCRH.CAR_ID AND CC.CAR_TYPE = '세단' AND TO_CHAR(CCRH.START_DATE,'MM')='10'
+ORDER BY CC.CAR_ID DESC
+ 
+-- 특정 옵션이 포함된 자동차 리스트 구하기
+-- Level 1 9,910명 완료
+SELECT *
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE REGEXP_LIKE(OPTIONS,'네비게이션')
+ORDER BY CAR_ID DESC
+ 
+-- 조건별로 분류하여 주문상태 출력하기
+-- Level 3 7,760명 완료
+SELECT ORDER_ID, PRODUCT_ID, TO_CHAR(OUT_DATE,'YYYY-MM-DD') AS OUT_DATE,
+       CASE WHEN TO_CHAR(OUT_DATE, 'YYYY-MM-DD') <= '2022-05-01' THEN '출고완료'
+            WHEN TO_CHAR(OUT_DATE, 'YYYY-MM-DD') > '2022-05-01' THEN '출고대기'
+            WHEN TO_CHAR(OUT_DATE, 'YYYY-MM-DD') IS NULL THEN '출고미정' 
+            END AS 출고여부
+FROM FOOD_ORDER
+ORDER BY ORDER_ID ASC
+ 
+-- 조건에 맞는 사용자 정보 조회하기
+-- Level 3 5,281명 완료
+ 
+-- 조회수가 가장 많은 중고거래 게시판의 첨부파일 조회하기
+-- Level 3 5,434명 완료
+ 
+-- 자동차 대여 기록 별 대여 금액 구하기
+-- Level 4 3,028명 완료
+ 
+-- 자동차 평균 대여 기간 구하기
+-- Level 2 7,571명 완료
+SELECT CAR_ID, ROUND(AVG(TO_CHAR(END_DATE-START_DATE+1)),1) AS AVERAGE_DURATION
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+GROUP BY CAR_ID
+HAVING ROUND(AVG(TO_CHAR((END_DATE-START_DATE)+1)),1) >= 7
+ORDER BY AVERAGE_DURATION DESC, CAR_ID DESC
+ 
+-- 취소되지 않은 진료 예약 조회하기
+-- Level 4 5,726명 완료
+ 
+-- 루시와 엘라 찾기
+-- Level 2 38,273명 완료
+SELECT ANIMAL_ID, NAME, SEX_UPON_INTAKE
+FROM ANIMAL_INS
+WHERE REGEXP_LIKE(NAME, 'Lucy|Ella|Pickle|Rogan|Sabrina|Mitty')
+ORDER BY ANIMAL_ID
+
+ 
+-- 이름에 el이 들어가는 동물 찾기
+-- Level 2 38,524명 완료
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE LOWER(NAME) LIKE '%el%' AND ANIMAL_TYPE = 'Dog'
+ORDER BY NAME ASC
+ 
+-- 중성화 여부 파악하기
+-- Level 2 34,337명 완료
+SELECT ANIMAL_ID, NAME,
+       CASE WHEN (SEX_UPON_INTAKE LIKE '%Neutered%' OR 
+                 SEX_UPON_INTAKE LIKE '%Spayed%' ) THEN 'O'
+            ELSE 'X'
+            END AS 중성화
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID, NAME, 중성화
+ 
+-- 오랜 기간 보호한 동물(2)
+-- Level 3 30,268명 완료
+ 
+-- 카테고리 별 상품 개수 구하기
+-- Level 2 9,567명 완료
+ 
+-- DATETIME에서 DATE로 형 변환
+-- Level 2 32,137명 완료
+ 
